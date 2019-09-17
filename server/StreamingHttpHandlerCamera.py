@@ -7,8 +7,7 @@ import urllib.parse as urlparse
 from .Streaming import Streaming
 from .RecordVideo import RecordVideo
 from .CaptureImage import CaptureImage
-# from .ControlServo import ControlServo
-# from .Sensors import Sensors
+
 from os import listdir
 from os.path import isfile, join
 import os
@@ -24,8 +23,6 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
     stream = Streaming()
     recordVideo = RecordVideo()
     captureImage = CaptureImage()
-    # sensors = Sensors()
-    # feeder = ControlServo()
 
     def do_HEAD(self):
         self.do_GET()
@@ -87,14 +84,6 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
             self.stream.setYoutubeKey(settings["youtube"], settings["key"])
             self.wfile.write(data.encode('utf-8'))
 
-        # if self.path == "/set_settings_feeder":
-        #     self.send_response(200)
-        #     self.end_headers()
-        #     data = self.rfile.read(int(self.headers['Content-Length']))
-        #     data = int(data.decode("utf-8"))
-        #     time = data * 86400
-        #     self.feeder.resetfeedAfter()
-        #     self.feeder.feedAfter(time)
 
     def do_GET(self):
 
@@ -105,25 +94,6 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
             self.send_header('Location', '/index.html?id='+str(counter))  
             self.end_headers()
             return
-
-        # elif self.path == '/sensors':
-        #     content_type = 'text/html; charset=utf-8'
-
-        #     connectedId = 0
-        #     startedStreaming = False
-        #     if self.stream.isStartedStream() == True:
-        #         startedStreaming = self.stream.isStartedStream()
-
-        #     if self.recordVideo.isStartedRecording() == True and self.stream.isStartedPreview() == True:
-        #         connectedId = self.recordVideo.getConnectedUserId()
-
-        #     content = (self.sensors.getSensorsData(
-        #         connectedId, startedStreaming)).encode('utf-8')
-        #     self.send_response(200)
-        #     self.send_header('Content-Type', content_type)
-        #     self.send_header('Content-Length', len(content))
-        #     self.end_headers()
-        #     self.wfile.write(content)
 
         else:
             url_parts = list(urlparse.urlparse(self.path))
@@ -162,12 +132,6 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
 
             if self.path == "/index.html":
                 self.path = 'templates/index.html'
-
-            # -----------feeder-----------------
-            # if self.path == "/feed":
-            #     self.send_response(200)
-            #     self.end_headers()
-            #     self.feeder.feed()
 
             # ------------stream------------------
             if self.path == '/stream_settings':
