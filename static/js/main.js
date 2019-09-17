@@ -384,4 +384,4 @@ function setStreamSettings() {
   } else alert("Input fields 'Link' and 'Key'")
 }
 
-onFullScreen()
+

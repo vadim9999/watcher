@@ -137,4 +137,3 @@ function waitStartPreview() {
   xhttp.send();
 }
 
-startPreview()
