@@ -1,0 +1,292 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Мурашина ферма</title>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" type="image/png" href="static/images/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="static/css/waterLevel.css">
+  <link rel="stylesheet" type="text/css" href="static/css/main.css">
+  <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="static/css/humiditySensor.css">
+  <link rel="stylesheet" type="text/css" href="static/fontawesome/css/all.css">
+  <link rel="stylesheet" type="text/css" href="static/css/thermometer.css">
+
+</head>
+
+<body style="background-color:inherit">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="static/images/logo1.png" width="30" height="30" alt="">
+        Ant Farm
+      </a>
+      <div class="pos-f-t">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li><p>CPU Temp: </p><span id="cpu_temp"></span></li>
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">Control Panel
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutSite">About author</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="shutdownPi()"><i class="fas fa-power-off"></i> Shutdown</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" onclick="rebootPi()"><i class="fas fa-sync-alt"></i> Reboot</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+  </nav>
+
+  <div class="container" style="margin-top:10px;">
+
+    <div id="alertBlock">
+    </div>
+
+    <div class="row" style="margin-bottom: 10px;">
+
+      <div class="col-auto ">
+        <div col="col-auto">
+          <div style="width:640px; height:480px">
+            <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative">
+              <img id="badge" width="640" height="480" />
+              <div style="position: absolute; bottom:0; width: 100%">
+                <button id="start-preview" type="button" onClick="startPreview();" class="btn btn-outline-primary">
+                  <i class="fas fa-play"></i>
+                </button>
+                <button id="stop-preview" type="button" onClick="stopPreview();" class="btn btn-outline-primary"
+                  disabled>
+                  <i class="fas fa-pause"></i>
+                </button>
+                <button id="stop-preview" style="float:right" type="button" onClick="onFullScreen();"
+                  class="btn btn-outline-primary">
+                  <i class="fas fa-expand"></i>
+                </button>
+                <span id="info" tabindex="0" title="Quality">
+                  <div class="btn-group dropup" style="float:right; padding-right: 10px;">
+
+                    <button id="videoResolution" type="button" class="btn btn-primary dropdown-toggle"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-cog"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a onClick="onQ720()" id="Q720" class="cursorQ dropdown-item">720 HD</a>
+                      <a onClick="onQ480()" id="Q480" class="cursorQ dropdown-item active">480</a>
+                      <a onClick="onQ240()" id="Q240" class="cursorQ dropdown-item">240</a>
+                    </div>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div col="col-auto" class="rowGrid">
+
+          <button id="start-stream" type="button" onClick="startStream();" class="btn btn-outline-primary">
+            <i class="fas fa-play-circle"></i> Start stream
+          </button>
+
+          <select style="width:15%; display:inline-block" class="custom-select " id="resolutionStream"
+            aria-label="Example select with button addon">
+
+            <option value="720">720 HD</option>
+            <option value="480" selected>480</option>
+            <option value="240">240</option>
+          </select>
+
+          <button id="stop-stream" type="button" onClick="stopStream();" class="btn btn-outline-danger" disabled>
+            <div id="blinkingStream"></div>
+            Stop
+          </button>
+
+          <button type="button" class="btn btn-outline-primary" onClick="getStreamSettings();" data-toggle="modal"
+            data-target="#settingsStream">
+            <i class="fas fa-cogs"></i> Settings
+          </button>
+        </div>
+        <div class="input-group ">
+          <input id="start-record-input" type="text" class="form-control" placeholder="Name of video"
+            aria-describedby="button-addon4">
+          <div class="input-group-append" id="button-addon4">
+            <select style=" display:inline-block" class="custom-select " id="resolutionRecord"
+              aria-label="Example select with button addon">
+              <option value="720">720 HD</option>
+              <option value="480" selected>480</option>
+              <option value="240">240</option>
+            </select>
+            <button id="start-record" class="btn btn-outline-primary" type="button" onclick="startRecord()" disabled>
+              <i class="fas fa-video"></i> Start record
+            </button>
+
+            <button id="stop-record" class="btn btn-outline-danger" type="button" onclick="stopRecord()" disabled>
+              <div id="blinkingRecord"></div>
+              <div id="stopWatch"><time>00:00:00</time></div>
+              Stop
+            </button>
+          </div>
+        </div>
+        <div class="input-group rowGrid">
+          <input id="capture-input" type="text" class="form-control" placeholder="Name of image"
+            aria-describedby="button-addon4">
+
+          <div class="input-group-append" id="button-addon4">
+            <select style=" display:inline-block" class="custom-select " id="resolutionImage"
+              aria-label="Example select with button addon">
+
+              <option value="720">1280x720</option>
+              <option value="480" selected>854x480</option>
+              <option value="240">426x240</option>
+            </select>
+            <button id="capture-image" onClick="captureImage()" class="btn btn-outline-primary" type="button" disabled>
+              <i class="fas fa-camera"></i> Take a photo
+            </button>
+          </div>
+        </div>
+        <button type="button" onClick="getVideoFiles();" class="btn btn-primary " data-toggle="modal"
+          data-target="#displayListVideos">
+          <i class="fas fa-images"></i> Mediafiles
+        </button>
+        
+      </div>
+
+      
+
+     
+    </div>
+
+    <div class="row">
+
+      <!-- Modal setting stream ---------------------------------------------------------------->
+      <div class="modal fade" id="settingsStream" tabindex="-1" role="dialog" aria-labelledby="settingsStream"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="settingsStream">Streaming settings in YouTube <i
+                  class="fab fa-youtube"></i></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="inputLink">Link</label>
+                  <input id="streamLink" type="text" class="form-control" id="inputLink"
+                    placeholder="Input link">
+                </div>
+                <div class="form-group">
+                  <label for="inputKey">Key</label>
+                  <input id="streamKey" type="text" class="form-control" id="inputKey" placeholder="Input key">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onClick="setStreamSettings()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal mediafiles -->
+      <div class="modal fade" id="displayListVideos" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Mediafiles</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <ul id="fileList" class="list-group">
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" onClick="getVideoFiles()" class="btn btn-primary">Refresh</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal feeder -->
+      <div class="modal fade" id="feeder" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="feederTitle">Settings feeder</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <label for="inputInterval">Interval</label>
+              <select id="inputInterval" style="width:15%; display:inline-block" class="custom-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">2</option>
+              </select>
+              <div>
+                <button type="button" class="btn btn-primary" onClick="feed()"><i class="fas fa-utensils"></i>
+                  Feed now</button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onClick="setSettingsFeeder()">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal about site -->
+      <div class="modal fade" id="aboutSite" tabindex="-1" role="dialog" aria-labelledby="aboutSiteModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="aboutSiteModalTitle">About author</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- ------------------------------------------------------------------------- -->
+    </div>
+  </div>
+      <footer class="footer fixed-bottom bg-black small text-center mainfooter">
+        <div class="container">
+        </br>
+          <span style="margin-top:20%">&copy; Putrov Vadim 2019</span>
+        </div>
+      </footer>
+      <script src="static/jquery/jquery-3.3.1.slim.min.js"></script>
+      <script src="static/jquery/popper.min.js"></script>
+      <script src="static/bootstrap/js/bootstrap.min.js"></script>
+      <script src="static/js/helper.js"></script>
+      <script src="static/js/timer.js"></script>
+      <script src="static/js/main.js"></script>
+      <script src="static/js/sendResolution.js"></script>
+</body>
+
+</html>
