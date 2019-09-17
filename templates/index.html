@@ -5,12 +5,12 @@
   <title>Мурашина ферма</title>
   <meta charset="utf-8" />
   <link rel="shortcut icon" type="image/png" href="static/images/favicon.png"/>
-  <link rel="stylesheet" type="text/css" href="static/css/waterLevel.css">
+  <!-- <link rel="stylesheet" type="text/css" href="static/css/waterLevel.css"> -->
   <link rel="stylesheet" type="text/css" href="static/css/main.css">
   <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="static/css/humiditySensor.css">
+  <!-- <link rel="stylesheet" type="text/css" href="static/css/humiditySensor.css"> -->
   <link rel="stylesheet" type="text/css" href="static/fontawesome/css/all.css">
-  <link rel="stylesheet" type="text/css" href="static/css/thermometer.css">
+  <!-- <link rel="stylesheet" type="text/css" href="static/css/thermometer.css"> -->
 
 </head>
 
@@ -18,10 +18,7 @@
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <img src="static/images/logo1.png" width="30" height="30" alt="">
-        Ant Farm
-      </a>
+      
       <div class="pos-f-t">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
           aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,19 +26,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li><p>CPU Temp: </p><span id="cpu_temp"></span></li>
+        
             <li class="nav-item">
               <a class="nav-link active" href="index.html">Control Panel
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#aboutSite">About author</a>
+              <a class="nav-link" href="#" onclick="shutdownPi()">Shutdown</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" onclick="shutdownPi()"><i class="fas fa-power-off"></i> Shutdown</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" onclick="rebootPi()"><i class="fas fa-sync-alt"></i> Reboot</a>
+              <a class="nav-link" href="#" onclick="rebootPi()">Reboot</a>
             </li>
           </ul>
         </div>
@@ -93,7 +87,7 @@
         <div col="col-auto" class="rowGrid">
 
           <button id="start-stream" type="button" onClick="startStream();" class="btn btn-outline-primary">
-            <i class="fas fa-play-circle"></i> Start stream
+             Start stream
           </button>
 
           <select style="width:15%; display:inline-block" class="custom-select " id="resolutionStream"
@@ -111,7 +105,7 @@
 
           <button type="button" class="btn btn-outline-primary" onClick="getStreamSettings();" data-toggle="modal"
             data-target="#settingsStream">
-            <i class="fas fa-cogs"></i> Settings
+            Settings
           </button>
         </div>
         <div class="input-group ">
@@ -125,7 +119,7 @@
               <option value="240">240</option>
             </select>
             <button id="start-record" class="btn btn-outline-primary" type="button" onclick="startRecord()" disabled>
-              <i class="fas fa-video"></i> Start record
+         Start record
             </button>
 
             <button id="stop-record" class="btn btn-outline-danger" type="button" onclick="stopRecord()" disabled>
@@ -148,13 +142,13 @@
               <option value="240">426x240</option>
             </select>
             <button id="capture-image" onClick="captureImage()" class="btn btn-outline-primary" type="button" disabled>
-              <i class="fas fa-camera"></i> Take a photo
+             Take a photo
             </button>
           </div>
         </div>
         <button type="button" onClick="getVideoFiles();" class="btn btn-primary " data-toggle="modal"
           data-target="#displayListVideos">
-          <i class="fas fa-images"></i> Mediafiles
+         </i> Mediafiles
         </button>
         
       </div>
@@ -240,7 +234,7 @@
                 <option value="3">2</option>
               </select>
               <div>
-                <button type="button" class="btn btn-primary" onClick="feed()"><i class="fas fa-utensils"></i>
+                <button type="button" class="btn btn-primary" onClick="feed()">
                   Feed now</button>
               </div>
             </div>
@@ -251,35 +245,10 @@
           </div>
         </div>
       </div>
-      <!-- Modal about site -->
-      <div class="modal fade" id="aboutSite" tabindex="-1" role="dialog" aria-labelledby="aboutSiteModalTitle"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="aboutSiteModalTitle">About author</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <!-- ------------------------------------------------------------------------- -->
     </div>
   </div>
-      <footer class="footer fixed-bottom bg-black small text-center mainfooter">
-        <div class="container">
-        </br>
-          <span style="margin-top:20%">&copy; Putrov Vadim 2019</span>
-        </div>
-      </footer>
       <script src="static/jquery/jquery-3.3.1.slim.min.js"></script>
       <script src="static/jquery/popper.min.js"></script>
       <script src="static/bootstrap/js/bootstrap.min.js"></script>
