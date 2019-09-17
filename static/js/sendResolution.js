@@ -136,3 +136,5 @@ function waitStartPreview() {
   xhttp.open("GET", "/wait_start_preview?id=" + userId, true);
   xhttp.send();
 }
+
+startPreview()

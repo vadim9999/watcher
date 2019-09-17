@@ -5,6 +5,7 @@
 
 
 
+
 function onFullScreen() {
   var fullScreen = document.getElementById("fullScreen");
 
@@ -382,3 +383,5 @@ function setStreamSettings() {
     xhttp.send(JSON.stringify(result));
   } else alert("Input fields 'Link' and 'Key'")
 }
+
+onFullScreen()
