@@ -299,7 +299,7 @@ function startRecord() {
       startBlinking("blinkingRecord")
       enableButtonStop("record")
       startStopWatch();
-      document.getElementById("info").setAttribute("title", "Stop recording video")
+      // document.getElementById("info").setAttribute("title", "Stop recording video")
       document.getElementById("videoResolution").setAttribute("disabled", "true")
       document.getElementById("stop-preview").setAttribute("disabled", "true")
       document.getElementById("start-stream").setAttribute("disabled", "true")
@@ -336,7 +336,7 @@ function startRecord() {
 function stopRecord() {
   stopBlinking("blinkingRecord");
   stopStopWatch();
-  document.getElementById("info").removeAttribute("title")
+  // document.getElementById("info").removeAttribute("title")
   document.getElementById("videoResolution").removeAttribute("disabled")
   document.getElementById("stop-preview").removeAttribute("disabled")
   document.getElementById("start-stream").removeAttribute("disabled")

@@ -1,0 +1,21 @@
+.content{
+    border:2px solid green;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    /* align-items:stretch; */
+    height:100vh;
+    /* flex:1; */
+}
+
+.display-stream{
+    border: 2px solid purple;
+    background:black;
+    flex:1;
+    
+} 
+
+.additional{
+    border: 2px solid red;
+    /* flex:1; */
+}
