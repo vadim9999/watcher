@@ -19,3 +19,17 @@
     border: 2px solid red;
     /* flex:1; */
 }
+
+#model-settings{
+    background:rgba(92, 155, 250, 0.464);
+    position:absolute;
+    width:600px;
+    height:300px;
+    border-radius: 30px;
+    left:50%;
+    top:50%;
+    padding:20px;
+    /* read about it more */
+    transform: translate(-50%, -50%)  
+    
+}

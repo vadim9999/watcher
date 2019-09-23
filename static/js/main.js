@@ -26,6 +26,21 @@ function onFullScreen() {
   };
 }
 
+var state = {
+  isHidden: true
+}
+function showSettingsModel(){
+  if(state.isHidden){
+    document.getElementById("model-settings").removeAttribute("hidden")
+    state.isHidden = false;
+
+  }else{
+    document.getElementById("model-settings").setAttribute("hidden","true")
+    state.isHidden = true;
+  }
+    
+  
+}
 var isBlocked = false;
 
 // function loadDoc() {
@@ -228,27 +243,9 @@ function captureImage() {
 
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4) {
-          var a = document.createElement('div');
-          a.className = "alerts alert alert-success alert-dismissible fade show";
-          a.setAttribute("role", "alert")
-          a.innerHTML = "Image was created successfully!"
-
-          var button = document.createElement('button');
-          button.className = "close";
-          button.type = "button"
-          button.setAttribute("data-dismiss", "alert")
-          button.setAttribute("aria-label", "Close")
-          a.appendChild(button)
-
-          var span = document.createElement("span");
-          span.setAttribute("aria-hidden", "true")
-          span.innerHTML = "&times;"
-          button.appendChild(span)
 
           document.getElementById("alertBlock").innerHTML = ""
           document.getElementById("alertBlock").innerHTML = "Created"
-          // document.getElementById("alertBlock").appendChild(a)
-
 
           setTimeout(function () {
             document.getElementById("alertBlock").innerHTML = "";

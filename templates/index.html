@@ -15,104 +15,111 @@
   <div class="content">
     <div class="display-stream">
         <!-- <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative"> -->
-      <img id="badge" width="100%" height="100%" />
+            <img id="badge" width="100%" height="100%" />  
+          <div>
+              <button id="start-preview" type="button" onClick="startPreview();" class="btn btn-outline-primary">
+                  Start
+                </button>
+                <button id="stop-preview" type="button" onClick="stopPreview();" class="btn btn-outline-primary" disabled>
+                  Stop
+                </button>
+                <button id="stop-preview" type="button" onClick="onFullScreen();"
+                  class="btn btn-outline-primary">
+                  Full
+                </button>
+                <button id="videoResolution" type="button" onClick="showSettingsModel()">
+                Settings
+              </button>
+          </div>
+      
       <!-- </div> -->
-    </div>
-
-    <div class="additional">
-      <div class="display-stream-block">
-        <button id="start-preview" type="button" onClick="startPreview();" class="btn btn-outline-primary">
-          Start
-        </button>
-        <button id="stop-preview" type="button" onClick="stopPreview();" class="btn btn-outline-primary" disabled>
-          Stop
-        </button>
-        <button id="stop-preview" style="float:right" type="button" onClick="onFullScreen();"
-          class="btn btn-outline-primary">
-          Full
-        </button>
-        <button id="videoResolution" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-          Settings
-        </button>
-        <select>
-            <option value="720">720 HD</option>
-            <option value="480" selected>480</option>
-            <option value="240">240</option>
-        </select>
-          
-      </div>
-      <div class="stream-block">
-        <button id="start-stream" type="button" onClick="startStream();" class="btn btn-outline-primary">
-          Start stream
-        </button>
-        <select style="width:15%; display:inline-block" class="custom-select " id="resolutionStream"
-          aria-label="Example select with button addon">
-
-          <option value="720">720 HD</option>
-          <option value="480" selected>480</option>
-          <option value="240">240</option>
-        </select>
-        <button id="stop-stream" type="button" onClick="stopStream();" class="btn btn-outline-danger" disabled>
-          <div id="blinkingStream"></div>
-          Stop
-        </button>
-
-        <button type="button" class="btn btn-outline-primary" onClick="getStreamSettings();" data-toggle="modal"
-          data-target="#settingsStream">
-          Settings
-        </button>
-      </div>
-
-
-      <div class="record-block">
-        <input id="start-record-input" type="text" class="form-control" placeholder="Name of video"
-          aria-describedby="button-addon4">
-        <select style=" display:inline-block" class="custom-select " id="resolutionRecord"
-          aria-label="Example select with button addon">
-          <option value="720">720 HD</option>
-          <option value="480" selected>480</option>
-          <option value="240">240</option>
-        </select>
-        <button id="start-record" class="btn btn-outline-primary" type="button" onclick="startRecord()" disabled>
-          Start record
-        </button>
-
-        <button id="stop-record" class="btn btn-outline-danger" type="button" onclick="stopRecord()" disabled>
-          <div id="blinkingRecord"></div>
-          <div id="stopWatch"><time>00:00:00</time></div>
-          Stop
-        </button>
-
-      </div>
-
-      <div class="image-block">
-        <input id="capture-input" type="text" class="form-control" placeholder="Name of image"
-          aria-describedby="button-addon4">
-        <select style=" display:inline-block" class="custom-select " id="resolutionImage"
-          aria-label="Example select with button addon">
-
-          <option value="720">1280x720</option>
-          <option value="480" selected>854x480</option>
-          <option value="240">426x240</option>
-        </select>
-        <button id="capture-image" onClick="captureImage()" class="btn btn-outline-primary" type="button" disabled>
-          Take a photo
-        </button>
-        <button type="button" onClick="getVideoFiles();" class="btn btn-primary " data-toggle="modal"
-          data-target="#displayListVideos">
-          </i> Mediafiles
-        </button>
-        <span id="alertBlock"></span>
-      </div>
-      <div>
-          <button type="button"  onclick="shutdownPi()">Shutdown</button>
-          <button type="button"  onclick="rebootPi()">Reboot</button>
-      </div>
-
 
     </div>
 
+    
+    <div id="model-settings" hidden>
+        <div class="additional">
+            <div class="display-stream-block">
+              
+              
+              <select>
+                  <option value="720">720 HD</option>
+                  <option value="480" selected>480</option>
+                  <option value="240">240</option>
+              </select>
+                
+            </div>
+            <div class="stream-block">
+              <button id="start-stream" type="button" onClick="startStream();" class="btn btn-outline-primary">
+                Start stream
+              </button>
+              <select style="width:15%; display:inline-block" class="custom-select " id="resolutionStream"
+                aria-label="Example select with button addon">
+      
+                <option value="720">720 HD</option>
+                <option value="480" selected>480</option>
+                <option value="240">240</option>
+              </select>
+              <button id="stop-stream" type="button" onClick="stopStream();" class="btn btn-outline-danger" disabled>
+                <div id="blinkingStream"></div>
+                Stop
+              </button>
+      
+              <button type="button" class="btn btn-outline-primary" onClick="getStreamSettings();" data-toggle="modal"
+                data-target="#settingsStream">
+                Settings
+              </button>
+            </div>
+      
+      
+            <div class="record-block">
+              <input id="start-record-input" type="text" class="form-control" placeholder="Name of video"
+                aria-describedby="button-addon4">
+              <select style=" display:inline-block" class="custom-select " id="resolutionRecord"
+                aria-label="Example select with button addon">
+                <option value="720">720 HD</option>
+                <option value="480" selected>480</option>
+                <option value="240">240</option>
+              </select>
+              <button id="start-record" class="btn btn-outline-primary" type="button" onclick="startRecord()" disabled>
+                Start record
+              </button>
+      
+              <button id="stop-record" class="btn btn-outline-danger" type="button" onclick="stopRecord()" disabled>
+                <div id="blinkingRecord"></div>
+                <div id="stopWatch"><time>00:00:00</time></div>
+                Stop
+              </button>
+      
+            </div>
+      
+            <div class="image-block">
+              <input id="capture-input" type="text" class="form-control" placeholder="Name of image"
+                aria-describedby="button-addon4">
+              <select style=" display:inline-block" class="custom-select " id="resolutionImage"
+                aria-label="Example select with button addon">
+      
+                <option value="720">1280x720</option>
+                <option value="480" selected>854x480</option>
+                <option value="240">426x240</option>
+              </select>
+              <button id="capture-image" onClick="captureImage()" class="btn btn-outline-primary" type="button" disabled>
+                Take a photo
+              </button>
+              <button type="button" onClick="getVideoFiles();" class="btn btn-primary " data-toggle="modal"
+                data-target="#displayListVideos">
+                </i> Mediafiles
+              </button>
+              <span id="alertBlock"></span>
+            </div>
+            <div>
+                <button type="button"  onclick="shutdownPi()">Shutdown</button>
+                <button type="button"  onclick="rebootPi()">Reboot</button>
+            </div>
+      
+      
+          </div>
+    </div>
     <!-- <div style="width:90%; height:90%">
     <div id="fullScreen" style="background:black; width:100%; height:100%; ">
       <img id="badge" width="90%" height="90%" />
