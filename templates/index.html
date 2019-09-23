@@ -14,7 +14,9 @@
 
   <div class="content">
     <div class="display-stream">
+        <!-- <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative"> -->
       <img id="badge" width="100%" height="100%" />
+      <!-- </div> -->
     </div>
 
     <div class="additional">
@@ -101,6 +103,11 @@
           data-target="#displayListVideos">
           </i> Mediafiles
         </button>
+        <span id="alertBlock"></span>
+      </div>
+      <div>
+          <button type="button"  onclick="shutdownPi()">Shutdown</button>
+          <button type="button"  onclick="rebootPi()">Reboot</button>
       </div>
 
 
@@ -314,6 +321,8 @@
     <script src="static/js/main.js"></script>
     <script src="static/js/sendResolution.js"></script>
     <script>
+
+
       startPreview()
         // setTimeout(autoStart, 5000)
         // function autoStart(){

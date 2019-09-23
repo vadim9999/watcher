@@ -246,7 +246,8 @@ function captureImage() {
           button.appendChild(span)
 
           document.getElementById("alertBlock").innerHTML = ""
-          document.getElementById("alertBlock").appendChild(a)
+          document.getElementById("alertBlock").innerHTML = "Created"
+          // document.getElementById("alertBlock").appendChild(a)
 
 
           setTimeout(function () {
