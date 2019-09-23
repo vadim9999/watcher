@@ -11,7 +11,7 @@ from .WIFIConnector import WIFIConnector
 class BluetoothServer():
     
     def run_server(self):
-        # subprocess.call(['sudo', 'hciconfig', 'hci0', 'piscan'])
+        subprocess.call(['sudo', 'hciconfig', 'hci0', 'piscan'])
         self.connected = False
         self.server_sock=BluetoothSocket( RFCOMM )
         
