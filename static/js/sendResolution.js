@@ -50,7 +50,7 @@ function startPreview() {
 
   var xhttp = new XMLHttpRequest();
   streamUrl = location.protocol + "//" + location.host + "/stream.mjpg?id=" + userId;
-
+// streamUrl= "/templates/122.jpg"
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       document.getElementById('badge').src = streamUrl;

@@ -6,7 +6,7 @@ body {
 }
 
 .content{
- border:2px solid green;
+ /* border:2px solid green; */
     display: flex; 
     flex-direction: column;
     height: 100%;
@@ -16,12 +16,9 @@ body {
     position:absolute;
     bottom:0;
 }
-img {
-    width: 100%;
-    height: 100%;
-}
+
 .display-stream{
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
     background:black;
     flex:1;
     position:relative;

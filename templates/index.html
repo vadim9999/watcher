@@ -18,7 +18,7 @@
   <div class="content">
     <div class="display-stream">
       <!-- <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative"> -->
-      <img id="badge" />
+      <img id="badge" width="100%" height="100%" />
 
 
       <!-- </div> -->
@@ -35,14 +35,16 @@
           <button id="videoResolution" type="button" onClick="showSettingsModel()">
             Settings
           </button>
+         
         </div>
     </div>
     
 
      <div id="model-settings" hidden>
+
       <div class="additional">
         <div class="display-stream-block">
-
+          
 
           <select>
             <option value="720">720 HD</option>
@@ -72,7 +74,10 @@
             Settings
           </button>
         </div>
-
+        
+        <div>
+             <span style="background: white" id="counter">---</span>
+        </div>
 
         <div class="record-block">
           <input id="start-record-input" type="text" class="form-control" placeholder="Name of video"
@@ -133,6 +138,10 @@
   <script src="static/js/main.js"></script>
   <script src="static/js/sendResolution.js"></script>
   <script>
+    if (document.body.scrollHeight < 480){
+      document.getElementById("badge").setAttribute("height",480 - (490 - document.body.scrollHeight))
+    }
+    document.getElementById("counter").innerHTML= "Height of body" +  document.body.scrollHeight
     startPreview()
     
    
@@ -147,7 +156,8 @@
           startPreview()
           console.log("Focus");
         }, 3000)
-        scroll()
+        document.getElementById("counter").innerHTML= "Height of body" + document.body.scrollHeight
+        // scroll()
         // page has focus, begin running task
       } else {
         setTimeout(
@@ -162,12 +172,14 @@
 
       
     }
-    scroll()
+    // scroll()
     function scroll(){
       setTimeout(function() {
       window.scrollTo(0,document.body.scrollHeight);
+      document.getElementById("counter").innerHTML= document.body.scrollHeight
     },4000)
     }
+
     
 
     
