@@ -4,10 +4,15 @@
     flex-direction: column;
     /* justify-content: space-around; */
     /* align-items:stretch; */
-    height:80vh;
+    height:100vh;
+  
     /* flex:1; */
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
 .display-stream{
     border: 2px solid purple;
     background:black;
@@ -16,7 +21,7 @@
 } 
 
 .additional{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     /* flex:1; */
 }
 
