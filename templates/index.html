@@ -4,7 +4,7 @@
 <head>
   <title>Мурашина ферма</title>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
   <link rel="stylesheet" type="text/css" href="static/css/flexbox.css">
   <!-- <link rel="stylesheet" type="text/css" href="static/bootstrap/css/bootstrap.min.css"> -->
   <!-- <link rel="stylesheet" type="text/css" href="static/fontawesome/css/all.css"> -->
@@ -12,31 +12,34 @@
 </head>
 
 <body>
+
+
+
   <div class="content">
     <div class="display-stream">
       <!-- <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative"> -->
       <img id="badge" />
-     
+
 
       <!-- </div> -->
-
+      <div class="set-block">
+          <button id="start-preview" type="button" onClick="startPreview();" class="btn btn-outline-primary">
+            Start
+          </button>
+          <button id="stop-preview" type="button" onClick="stopPreview();" class="btn btn-outline-primary" disabled>
+            Stop
+          </button>
+          <button id="stop-preview" type="button" onClick="onFullScreen();" class="btn btn-outline-primary">
+            Full
+          </button>
+          <button id="videoResolution" type="button" onClick="showSettingsModel()">
+            Settings
+          </button>
+        </div>
     </div>
- <div>
-    <button id="start-preview" type="button" onClick="startPreview();" class="btn btn-outline-primary">
-      Start
-    </button>
-    <button id="stop-preview" type="button" onClick="stopPreview();" class="btn btn-outline-primary" disabled>
-      Stop
-    </button>
-    <button id="stop-preview" type="button" onClick="onFullScreen();" class="btn btn-outline-primary">
-      Full
-    </button>
-    <button id="videoResolution" type="button" onClick="showSettingsModel()">
-      Settings
-    </button>
-  </div>
+    
 
-    <div id="model-settings" hidden>
+     <div id="model-settings" hidden>
       <div class="additional">
         <div class="display-stream-block">
 
@@ -118,44 +121,59 @@
 
 
       </div>
-    </div>
+    </div> 
+  </div>
+  <!-- ------------------------------------------------------------------------- -->
 
-    <!-- ------------------------------------------------------------------------- -->
-
-    <!-- <script src="static/jquery/jquery-3.3.1.slim.min.js"></script>
+  <!-- <script src="static/jquery/jquery-3.3.1.slim.min.js"></script>
     <script src="static/jquery/popper.min.js"></script> -->
-    <!-- <script src="static/bootstrap/js/bootstrap.min.js"></script> -->
-    <script src="static/js/helper.js"></script>
-    <script src="static/js/timer.js"></script>
-    <script src="static/js/main.js"></script>
-    <script src="static/js/sendResolution.js"></script>
-    <script>
-      startPreview()
+  <!-- <script src="static/bootstrap/js/bootstrap.min.js"></script> -->
+  <script src="static/js/helper.js"></script>
+  <script src="static/js/timer.js"></script>
+  <script src="static/js/main.js"></script>
+  <script src="static/js/sendResolution.js"></script>
+  <script>
+    startPreview()
+    
+   
+
+    window.addEventListener("focus", handleBrowserState.bind(this, true));
+    window.addEventListener("blur", handleBrowserState.bind(this, false));
+
+    function handleBrowserState(isActive) {
+      if (isActive) {
+
+        setTimeout(function () {
+          startPreview()
+          console.log("Focus");
+        }, 3000)
+        scroll()
+        // page has focus, begin running task
+      } else {
+        setTimeout(
+          function () {
+            stopPreview()
+            console.log("No focus");
+          }, 1000
+        )
 
 
-      window.addEventListener("focus", handleBrowserState.bind(this, true));
-      window.addEventListener("blur", handleBrowserState.bind(this, false));
-
-      function handleBrowserState(isActive) {
-        if (isActive) {
-
-          setTimeout(function () {
-            startPreview()
-            console.log("Focus");
-          }, 3000)
-          // page has focus, begin running task
-        } else {
-          setTimeout(
-            function () {
-              stopPreview()
-              console.log("No focus");
-            }, 1000
-          )
-
-
-        }
       }
 
+      
+    }
+    scroll()
+    function scroll(){
+      setTimeout(function() {
+      window.scrollTo(0,document.body.scrollHeight);
+    },4000)
+    }
+    
+
+    
+    
+    
+    // window.scrollTo(0,document.querySelector(".badge").scrollHeight);
       // document.addEventListener('visibilitychange', function () {
       //   if (document.hidden) {
       //     setTimeout(
@@ -186,7 +204,7 @@
         // // startPreview()
         // }
 
-    </script>
+  </script>
 </body>
 
 </html>
