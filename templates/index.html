@@ -11,7 +11,6 @@
 </head>
 
 <body>
-  <span id="checker">Ok</span>
   <div class="content">
     <div class="display-stream">
       <!-- <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative"> -->
@@ -142,16 +141,14 @@
           setTimeout(function () {
             startPreview()
             console.log("Focus");
-            document.getElementById("checker").innerHTML = "Focus"
-          }, 6000)
+          }, 3000)
           // page has focus, begin running task
         } else {
           setTimeout(
             function () {
               stopPreview()
-              document.getElementById("checker").innerHTML = "No focus"
               console.log("No focus");
-            }, 3000
+            }, 1000
           )
 
 
