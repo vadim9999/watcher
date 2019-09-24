@@ -11,7 +11,7 @@
 </head>
 
 <body>
-
+  <span id="checker">Ok</span>
   <div class="content">
     <div class="display-stream">
       <!-- <div id="fullScreen" style="background:black; width:auto; height:auto; position: relative"> -->
@@ -131,27 +131,56 @@
     <script src="static/js/sendResolution.js"></script>
     <script>
       startPreview()
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) {
-          setTimeout(
-            function(){
-              stopPreview()
-          console.log("No focus");
-            },2000
-          )
-          
 
-        } else {
-          // page has focus, begin running task
-          setTimeout(function() {
+
+      window.addEventListener("focus", handleBrowserState.bind(this, true));
+      window.addEventListener("blur", handleBrowserState.bind(this, false));
+
+      function handleBrowserState(isActive) {
+        if (isActive) {
+
+          setTimeout(function () {
             startPreview()
             console.log("Focus");
-          },5000)
-          
-        }
-      })
+            document.getElementById("checker").innerHTML = "Focus"
+          }, 6000)
+          // page has focus, begin running task
+        } else {
+          setTimeout(
+            function () {
+              stopPreview()
+              document.getElementById("checker").innerHTML = "No focus"
+              console.log("No focus");
+            }, 3000
+          )
 
-      
+
+        }
+      }
+
+      // document.addEventListener('visibilitychange', function () {
+      //   if (document.hidden) {
+      //     setTimeout(
+      //       function(){
+      //         stopPreview()
+      //         document.getElementById("checker").innerHTML="No focus"
+      //     console.log("No focus");
+      //       },2000
+      //     )
+
+
+      //   } else {
+      //     // page has focus, begin running task
+      //     setTimeout(function() {
+      //       startPreview()
+      //       console.log("Focus");
+      //       document.getElementById("checker").innerHTML="Focus"
+      //     },5000)
+
+      //   }
+      // })
+
+
 
         // setTimeout(autoStart, 5000)
         // function autoStart(){
