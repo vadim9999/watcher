@@ -56,7 +56,7 @@ class Streaming():
         self.camera = picamera.PiCamera(resolution=resolution1, framerate=24)
         if(bw == True):
             self.camera.color_effects = (128,128)
-
+        self.camera.zoom = (0.18,0.2,0.4,0.6)
         self.output = StreamingOutput()
 
     # *********Preview***********
