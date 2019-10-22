@@ -45,6 +45,7 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
             data = str(data.decode("utf-8"))
             data = json.loads(data)
             camera = self.stream.getCamera()
+            
             self.recordVideo.startRecording(
                 data["filename"], data["resolution"], True, camera, userId)
             self.wfile.write("ok".encode('utf-8'))
@@ -62,8 +63,11 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
         if self.path == "/start":
             self.send_response(200)
             self.end_headers()
+           
             resolution = str(self.rfile.read(
                 int(self.headers['Content-Length'])).decode("utf-8"))
+            print("*****resolution")
+            print(data["resolution"])
             self.stream.startRecording(resolution)
 
         if self.path == '/start_stream':
