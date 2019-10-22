@@ -275,11 +275,11 @@ function getResolution(resolution) {
       break;
 
     case "480":
-      return "854x480"
+      return "640x480"
       break;
 
     case "240":
-      return "426x240"
+      return "320x240"
       break;
     default:
       break;

@@ -45,12 +45,13 @@
       <div class="additional">
         <div class="display-stream-block">
           
-
-          <select>
-            <option value="720">720 HD</option>
-            <option value="480" selected>480</option>
-            <option value="240">240</option>
-          </select>
+          <button onClick="onQ480()">480</button>
+          <button onClick="onQ240()">240</button>
+          <!-- <select>
+            <option onClick="onQ720()" value="720">720 HD</option>
+            <option   value="480" selected>480</option>
+            <option onClick="onQ240()" value="240">240</option>
+          </select> -->
 
         </div>
         <div class="stream-block">
@@ -138,9 +139,9 @@
   <script src="static/js/main.js"></script>
   <script src="static/js/sendResolution.js"></script>
   <script>
-    if (document.body.scrollHeight < 480){
-      document.getElementById("badge").setAttribute("height",480 - (490 - document.body.scrollHeight))
-    }
+    
+      document.getElementById("badge").setAttribute("height",document.body.scrollHeight - ((document.body.scrollHeight + 10) - document.body.scrollHeight))
+  
     document.getElementById("counter").innerHTML= "Height of body" +  document.body.scrollHeight
     startPreview()
     

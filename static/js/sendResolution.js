@@ -1,6 +1,11 @@
 var item = "cursorQ dropdown-item";
-var resolution = "854x480";
+var resolution = "640x480";
+// var resolution = "320x240";
+var bw = false;
 
+function onBW(){
+  bw = !bw;
+}
 
 function onQ720() {
   resolution = "1280x720"
@@ -10,19 +15,22 @@ function onQ720() {
   onChangeQuality()
 }
 
+
 function onQ480() {
   resolution = "640x480"
-  document.getElementById("Q720").setAttribute("class", item)
-  document.getElementById("Q480").setAttribute("class", item + " active")
-  document.getElementById("Q240").setAttribute("class", item)
+  console.log("onClick");
+  
+  // document.getElementById("Q720").setAttribute("class", item)
+  // document.getElementById("Q480").setAttribute("class", item + " active")
+  // document.getElementById("Q240").setAttribute("class", item)
   onChangeQuality()
 }
 
 function onQ240() {
-  resolution = "426x240"
-  document.getElementById("Q720").setAttribute("class", item)
-  document.getElementById("Q480").setAttribute("class", item)
-  document.getElementById("Q240").setAttribute("class", item + " active")
+  resolution = "320x240"
+  // document.getElementById("Q720").setAttribute("class", item)
+  // document.getElementById("Q480").setAttribute("class", item)
+  // document.getElementById("Q240").setAttribute("class", item + " active")
   onChangeQuality()
 }
 
@@ -57,7 +65,12 @@ function startPreview() {
     }
   }
   xhttp.open("POST", "/start?id=" + userId, true);
-  xhttp.send(resolution);
+
+  var result = {
+    "resolution": resolution,
+    "bs":bw
+  }
+  xhttp.send(JSON.stringify(result));
 }
 
 function stopPreview() {
