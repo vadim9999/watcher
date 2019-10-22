@@ -11,7 +11,7 @@ function onQ720() {
 }
 
 function onQ480() {
-  resolution = "854x480"
+  resolution = "640x480"
   document.getElementById("Q720").setAttribute("class", item)
   document.getElementById("Q480").setAttribute("class", item + " active")
   document.getElementById("Q240").setAttribute("class", item)
