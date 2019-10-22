@@ -52,8 +52,11 @@ class Streaming():
         return self.connectedUserId
     # ------------------
 
-    def startCamera(self, resolution1):
+    def startCamera(self, resolution1,bw):
         self.camera = picamera.PiCamera(resolution=resolution1, framerate=24)
+        if(bw == True):
+            self.camera.color_effects = (128,128)
+
         self.output = StreamingOutput()
 
     # *********Preview***********
@@ -123,7 +126,7 @@ class Streaming():
             selfed.send_response(200)
             selfed.end_headers()
 
-    def startRecording(self, resolution):
+    def startRecording(self, resolution, bw):
         if self.startedStream == True:
             self.splitter_port = True
 
@@ -133,7 +136,7 @@ class Streaming():
             self.startedPreview = True
         else:
             if(self.startedPreview == False):
-                self.startCamera(resolution)
+                self.startCamera(resolution, bw)
                 self.camera.start_recording(self.output, format='mjpeg')
                 self.startedPreview = True
 
@@ -180,7 +183,7 @@ class Streaming():
             stream_cmd = 'ffmpeg -f h264 -r 25 -i - -itsoffset 5.5 -fflags nobuffer -f lavfi -i anullsrc -c:v copy -c:a aac -strict experimental -f flv ' + self.youtube + "/" + self.key
             self.stream_pipe = subprocess.Popen(
                 stream_cmd, shell=True, stdin=subprocess.PIPE, preexec_fn=os.setsid)
-            self.startCamera(resolution1=resolution1)
+            self.startCamera(resolution1=resolution1, bw=bw)
             self.camera.vflip = True
             self.camera.hflip = True
             self.camera.start_recording(

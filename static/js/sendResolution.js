@@ -5,6 +5,7 @@ var bw = false;
 
 function onBW(){
   bw = !bw;
+  onChangeQuality()
 }
 
 function onQ720() {
@@ -40,7 +41,7 @@ function onChangeQuality() {
     setTimeout(function () {
       startPreview()
     }
-      , 1000);
+      , 4000);
 
   }
 }
@@ -68,7 +69,7 @@ function startPreview() {
 
   var result = {
     "resolution": resolution,
-    "bs":bw
+    "bw":bw
   }
   xhttp.send(JSON.stringify(result));
 }
