@@ -67,7 +67,7 @@ class StreamingHttpHandlerCamera(BaseHTTPRequestHandler):
             resolution = str(self.rfile.read(
                 int(self.headers['Content-Length'])).decode("utf-8"))
             print("*****resolution")
-            print(data["resolution"])
+            print(resolution)
             self.stream.startRecording(resolution)
 
         if self.path == '/start_stream':
